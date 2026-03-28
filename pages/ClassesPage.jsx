@@ -365,8 +365,7 @@ const ClassesPage = () => {
                 if (result.students && result.students.length > 0) {
                     for (const impStu of result.students) {
                         const existing = students.find(s => 
-                            s.name.trim().toLowerCase() === impStu.name.trim().toLowerCase() &&
-                            s.sex.toLowerCase() === impStu.sex.toLowerCase()
+                            s.name.trim().toLowerCase() === impStu.name.trim().toLowerCase()
                         );
                         
                         if (existing) {

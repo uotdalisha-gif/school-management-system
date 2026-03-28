@@ -338,8 +338,8 @@ const StudentsPage = () => {
         
         if (file.name.endsWith('.csv')) {
             const { validStudents, errors } = parseStudentCSV(await file.text());
-            const existingIdentifiers = new Set(students.map(s => `${s.name.toLowerCase()}|${s.sex.toLowerCase()}`));
-            const nonDuplicateStudents = validStudents.filter(s => !existingIdentifiers.has(`${s.name.toLowerCase()}|${s.sex.toLowerCase()}`));
+            const existingIdentifiers = new Set(students.map(s => s.name.trim().toLowerCase()));
+            const nonDuplicateStudents = validStudents.filter(s => !existingIdentifiers.has(s.name.trim().toLowerCase()));
             if (nonDuplicateStudents.length > 0) {
                 await addStudents(nonDuplicateStudents);
             }
@@ -382,8 +382,7 @@ const StudentsPage = () => {
                 if (result.students && result.students.length > 0) {
                     for (const impStu of result.students) {
                         const existing = students.find(s => 
-                            s.name.trim().toLowerCase() === impStu.name.trim().toLowerCase() &&
-                            s.sex.toLowerCase() === impStu.sex.toLowerCase()
+                            s.name.trim().toLowerCase() === impStu.name.trim().toLowerCase()
                         );
                         
                         if (existing) {
