@@ -186,8 +186,11 @@ export const parseExcelFile = async (file) => {
                                 studentId = existingStudentInResults.id;
                                 
                                 let rawPhone = colMapping.phone >= 0 ? String(row[colMapping.phone] || '').trim() : '';
-                                if (rawPhone && !rawPhone.startsWith('0') && rawPhone.replace(/\s/g, '').length >= 8 && rawPhone !== 'undefined') {
-                                    rawPhone = '0' + rawPhone;
+                                if (rawPhone && rawPhone !== 'undefined') {
+                                    rawPhone = rawPhone.replace(/^(0?\+855)\s*/, '0');
+                                    if (!rawPhone.startsWith('0') && rawPhone.replace(/\s/g, '').length >= 8) {
+                                        rawPhone = '0' + rawPhone;
+                                    }
                                 }
                                 
                                 // Enrich existing student with phone if they were missing it from a previous sheet
@@ -202,8 +205,11 @@ export const parseExcelFile = async (file) => {
                                 studentId = 'stu_imp_' + Date.now() + '_' + i + '_' + Math.random().toString(36).substr(2, 3);
                                 
                                 let rawPhone = colMapping.phone >= 0 ? String(row[colMapping.phone] || '').trim() : '';
-                                if (rawPhone && !rawPhone.startsWith('0') && rawPhone.replace(/\s/g, '').length >= 8 && rawPhone !== 'undefined') {
-                                    rawPhone = '0' + rawPhone;
+                                if (rawPhone && rawPhone !== 'undefined') {
+                                    rawPhone = rawPhone.replace(/^(0?\+855)\s*/, '0');
+                                    if (!rawPhone.startsWith('0') && rawPhone.replace(/\s/g, '').length >= 8) {
+                                        rawPhone = '0' + rawPhone;
+                                    }
                                 }
 
                                 const studentObj = {

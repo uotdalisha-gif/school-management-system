@@ -77,8 +77,17 @@ const StudentModal = ({ studentData, onClose }) => {
             }
         }
 
+        let processedPhone = formData.phone?.trim() || '';
+        if (processedPhone) {
+            processedPhone = processedPhone.replace(/^(0?\+855)\s*/, '0');
+            if (!processedPhone.startsWith('0') && processedPhone.replace(/\s/g, '').length >= 8) {
+                processedPhone = '0' + processedPhone;
+            }
+        }
+
         const payload = {
             ...formData,
+            phone: processedPhone
         };
 
         try {
@@ -152,17 +161,6 @@ const StudentModal = ({ studentData, onClose }) => {
                         </button>
                     </div>
                 </form>
-                {isBulkDeleteModalOpen && (
-                    <ConfirmModal
-                        isOpen={isBulkDeleteModalOpen}
-                        onClose={() => setIsBulkDeleteModalOpen(false)}
-                        onConfirm={handleBulkDelete}
-                        title="Delete Selected Students"
-                        message={`Are you sure you want to permanently delete ${selectedStudentIds.size} selected students? This will also remove their enrollments, attendance, and grades.`}
-                        confirmText={`Delete ${selectedStudentIds.size} Students`}
-                        confirmColor="red"
-                    />
-                )}
             </div>
         </div>
     );

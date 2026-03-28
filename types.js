@@ -9,7 +9,6 @@ export const UserRole = {
     Teacher: 'Teacher',
     OfficeWorker: 'Office Worker',
     Guard: 'Guard',
-    Cleaner: 'Cleaner',
 };
 
 export const StaffRole = {

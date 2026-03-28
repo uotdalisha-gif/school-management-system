@@ -1,0 +1,325 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36" version="29.6.6" pages="3">
+  <diagram id="L0" name="Level 0 - Context">
+    <mxGraphModel dx="1554" dy="862" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="L0-0" />
+        <mxCell id="L0-1" parent="L0-0" />
+        <mxCell id="L0-SMS" parent="L0-1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#1e293b;fontColor=#ffffff;strokeColor=#3b82f6;strokeWidth=4;fontStyle=1;" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;SCHOOL MANAGEMENT HUB&lt;/font&gt;" vertex="1">
+          <mxGeometry height="220" width="220" x="325" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="L0-ADMIN" parent="L0-1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eff6ff;strokeColor=#3b82f6;fontStyle=1;fontSize=14;" value="Admin Staff" vertex="1">
+          <mxGeometry height="80" width="130" x="130" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="L0-TEACHER" parent="L0-1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ecfdf5;strokeColor=#10b981;fontStyle=1;fontSize=14;" value="Teachers" vertex="1">
+          <mxGeometry height="70" width="130" x="370" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="L0-OFFICE" parent="L0-1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fffbeb;strokeColor=#f59e0b;fontStyle=1;fontSize=14;" value="Office Staff" vertex="1">
+          <mxGeometry height="70" width="130" x="560" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="L0-SUPA" parent="L0-1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#020617;fontColor=#ffffff;strokeColor=#3b82f6;fontStyle=1;fontSize=14;" value="Supabase Database" vertex="1">
+          <mxGeometry height="70" width="150" x="360" y="700" as="geometry" />
+        </mxCell>
+        <mxCell id="L0-E1" edge="1" parent="L0-1" source="L0-ADMIN" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;startArrow=classic;endArrow=classic;strokeColor=#3b82f6;" target="L0-SMS" value="Controls &amp; Reports">
+          <mxGeometry relative="1" x="-0.3455" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="L0-E2" edge="1" parent="L0-1" source="L0-TEACHER" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;startArrow=classic;endArrow=classic;strokeColor=#10b981;" target="L0-SMS" value="Attendance &amp; Grades">
+          <mxGeometry relative="1" x="-0.7" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="435" y="230" />
+              <mxPoint x="435" y="230" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="L0-E3" edge="1" parent="L0-1" source="L0-OFFICE" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;startArrow=classic;endArrow=classic;strokeColor=#f59e0b;" target="L0-SMS" value="Registration">
+          <mxGeometry relative="1" x="-0.44" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="L0-E5" edge="1" parent="L0-1" source="L0-SMS" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;startArrow=classic;endArrow=classic;strokeColor=#3b82f6;strokeWidth=2;" target="L0-SUPA" value="Cloud Sync">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="L1" name="Level 1 - Functional Map">
+    <mxGraphModel dx="1554" dy="1962" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="L1-0" />
+        <mxCell id="L1-1" parent="L1-0" />
+        <mxCell id="L1-E-ADMIN" parent="L1-1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eff6ff;strokeColor=#3b82f6;fontStyle=1;fontSize=12;align=center;" value="Admin Staff" vertex="1">
+          <mxGeometry height="55" width="120" x="600" y="-55" as="geometry" />
+        </mxCell>
+        <mxCell id="L1-E-OFFICE" parent="L1-1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fffbeb;strokeColor=#f59e0b;fontStyle=1;fontSize=12;align=center;" value="Office Staff" vertex="1">
+          <mxGeometry height="55" width="120" y="215" as="geometry" />
+        </mxCell>
+        <mxCell id="L1-E-TEACHER" parent="L1-1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ecfdf5;strokeColor=#10b981;fontStyle=1;fontSize=12;align=center;" value="Teachers" vertex="1">
+          <mxGeometry height="55" width="120" x="930" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="L1-P1" parent="L1-1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff7ed;strokeColor=#fb923c;strokeWidth=2;fontStyle=1;fontSize=12;" value="1.0 User &amp; Access&#xa;Management" vertex="1">
+          <mxGeometry height="100" width="160" x="300" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="L1-P2" parent="L1-1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f0fdf4;strokeColor=#22c55e;strokeWidth=2;fontStyle=1;fontSize=12;" value="2.0 Student&#xa;Registration" vertex="1">
+          <mxGeometry height="100" width="160" x="300" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="L1-P3" parent="L1-1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ecfdf5;strokeColor=#10b981;strokeWidth=2;fontStyle=1;fontSize=12;" value="3.0 Academic&#xa;Management" vertex="1">
+          <mxGeometry height="100" width="160" x="300" y="500" as="geometry" />
+        </mxCell>
+        <mxCell id="L1-P5" parent="L1-1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#faf5ff;strokeColor=#a855f7;strokeWidth=2;fontStyle=1;fontSize=12;" value="4.0 Data&#xa;Synchronization" vertex="1">
+          <mxGeometry height="120" width="160" x="800" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="L1-D1" parent="L1-1" style="shape=partialRectangle;right=0;left=0;bottom=1;top=1;fillColor=none;strokeColor=#fb923c;strokeWidth=2;fontSize=10;fontStyle=1;" value="D1: staff (roles, passwords)" vertex="1">
+          <mxGeometry height="30" width="160" x="460" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="L1-D2" parent="L1-1" style="shape=partialRectangle;right=0;left=0;bottom=1;top=1;fillColor=none;strokeColor=#22c55e;strokeWidth=2;fontSize=10;fontStyle=1;" value="D2: students + enrollments" vertex="1">
+          <mxGeometry height="30" width="160" x="160" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="L1-D3" parent="L1-1" style="shape=partialRectangle;right=0;left=0;bottom=1;top=1;fillColor=none;strokeColor=#10b981;strokeWidth=2;fontSize=10;fontStyle=1;" value="D3: grades + attendance" vertex="1">
+          <mxGeometry height="30" width="160" x="670" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="L1-F-A1" edge="1" parent="L1-1" source="L1-E-ADMIN" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#fb923c;" target="L1-P1" value="Manage Roles / Reports">
+          <mxGeometry relative="1" x="0.1111" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="L1-F-A2" edge="1" parent="L1-1" source="L1-P1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#fb923c;dashed=1;" target="L1-E-ADMIN" value="Reports / Dashboards">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L1-F-A3" edge="1" parent="L1-1" source="L1-P1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#fb923c;startArrow=classic;endArrow=classic;" target="L1-D1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L1-F-O1" edge="1" parent="L1-1" source="L1-E-OFFICE" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#22c55e;" target="L1-P2" value="Student Info">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L1-F-O2" edge="1" parent="L1-1" source="L1-P2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#22c55e;dashed=1;" target="L1-E-OFFICE" value="Student ID / Confirmation">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L1-F-O3" edge="1" parent="L1-1" source="L1-P2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#22c55e;startArrow=classic;endArrow=classic;" target="L1-D2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L1-F-T1" edge="1" parent="L1-1" source="L1-E-TEACHER" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#10b981;" target="L1-P3" value="Grades / Attendance">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L1-F-T2" edge="1" parent="L1-1" source="L1-P3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#10b981;dashed=1;" target="L1-E-TEACHER" value="Class Lists / Reports">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L1-F-T3" edge="1" parent="L1-1" source="L1-P3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#10b981;startArrow=classic;endArrow=classic;" target="L1-D3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L1-F-S1" edge="1" parent="L1-1" source="L1-D1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#a855f7;" target="L1-P5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L1-F-S2" edge="1" parent="L1-1" source="L1-D2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#a855f7;" target="L1-P5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L1-F-S3" edge="1" parent="L1-1" source="L1-D3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#a855f7;" target="L1-P5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L1-F-S5" edge="1" parent="L1-1" source="L1-P5" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#a855f7;strokeWidth=2;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="ypst5jl0CERfcJKrzyVG-0" value="sync_school_data_v2() API">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1210" y="360" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ypst5jl0CERfcJKrzyVG-0" parent="L1-1" style="rounded=0;whiteSpace=wrap;html=1;" value="Supabase Database" vertex="1">
+          <mxGeometry height="60" width="120" x="1210" y="330" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="L2" name="Level 2 - Process Details">
+    <mxGraphModel dx="2825" dy="1567" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="1800" math="0" shadow="0">
+      <root>
+        <mxCell id="L2-0" />
+        <mxCell id="L2-1" parent="L2-0" />
+        <mxCell id="L2-S1-BOX" parent="L2-1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff7ed;strokeColor=#ea580c;strokeWidth=2;opacity=40;" vertex="1">
+          <mxGeometry height="280" width="1050" x="30" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S1-HEADER" parent="L2-1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontColor=#ea580c;fontStyle=1;fontSize=13;" value="Process 1.0 – User &amp; Access Management" vertex="1">
+          <mxGeometry height="30" width="1050" x="30" y="35" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S1-ADMIN" parent="L2-1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eff6ff;strokeColor=#3b82f6;fontStyle=1;fontSize=11;" value="Admin / Staff User" vertex="1">
+          <mxGeometry height="50" width="120" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S1-P1" parent="L2-1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#ea580c;strokeWidth=2;fontSize=11;" value="1.1 Credential Input" vertex="1">
+          <mxGeometry height="80" width="130" x="170" y="135" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S1-P2" parent="L2-1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#ea580c;strokeWidth=2;fontSize=11;" value="1.2 Password Hashing" vertex="1">
+          <mxGeometry height="80" width="130" x="360" y="135" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S1-P3" parent="L2-1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#ea580c;strokeWidth=2;fontSize=11;" value="1.3 Role Verification" vertex="1">
+          <mxGeometry height="80" width="130" x="580" y="85" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S1-P4" parent="L2-1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#ea580c;strokeWidth=2;fontSize=11;" value="1.4 Audit Log&#xa;Generation" vertex="1">
+          <mxGeometry height="80" width="130" x="790" y="85" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S1-DS1" parent="L2-1" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#ea580c;strokeWidth=1;fontSize=10;fontStyle=1;size=10;" value="DS1: staff&#xa;(roles, passwords)" vertex="1">
+          <mxGeometry height="60" width="130" x="450" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S1-DS2" parent="L2-1" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#ea580c;strokeWidth=1;fontSize=10;fontStyle=1;size=10;" value="DS2: audit_log" vertex="1">
+          <mxGeometry height="60" width="110" x="970" y="95" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S1-E1" edge="1" parent="L2-1" source="L2-S1-ADMIN" style="rounded=1;strokeColor=#ea580c;" target="L2-S1-P1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S1-E2" edge="1" parent="L2-1" source="L2-S1-P1" style="rounded=1;strokeColor=#ea580c;" target="L2-S1-P2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S1-E3" edge="1" parent="L2-1" source="L2-S1-P2" style="rounded=1;strokeColor=#ea580c;" target="L2-S1-P3" value="hash_verified">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S1-E4" edge="1" parent="L2-1" source="L2-S1-P3" style="rounded=1;strokeColor=#ea580c;" target="L2-S1-P4" value="Access granted / denied">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S1-E5" edge="1" parent="L2-1" source="L2-S1-P4" style="rounded=1;strokeColor=#ea580c;" target="L2-S1-DS2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S1-E6" edge="1" parent="L2-1" source="L2-S1-P2" style="rounded=1;strokeColor=#ea580c;startArrow=classic;endArrow=classic;" target="L2-S1-DS1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S2-BOX" parent="L2-1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0fdf4;strokeColor=#16a34a;strokeWidth=2;opacity=40;" vertex="1">
+          <mxGeometry height="310" width="1050" x="30" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S2-HEADER" parent="L2-1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontColor=#16a34a;fontStyle=1;fontSize=13;" value="Process 2.0 – Student Registration" vertex="1">
+          <mxGeometry height="30" width="1050" x="30" y="355" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S2-OFFICE" parent="L2-1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fffbeb;strokeColor=#f59e0b;fontStyle=1;fontSize=11;" value="Office Staff" vertex="1">
+          <mxGeometry height="50" width="100" y="490" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S2-P1" parent="L2-1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#16a34a;strokeWidth=2;fontSize=11;" value="2.1 Student&#xa;Data Input" vertex="1">
+          <mxGeometry height="80" width="130" x="150" y="465" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S2-P2" parent="L2-1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#16a34a;strokeWidth=2;fontSize=11;" value="2.2 Data Validation" vertex="1">
+          <mxGeometry height="80" width="130" x="330" y="465" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S2-P3" parent="L2-1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#16a34a;strokeWidth=2;fontSize=11;" value="2.3 Student ID&#xa;Generation" vertex="1">
+          <mxGeometry height="80" width="130" x="530" y="465" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S2-P4" parent="L2-1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#16a34a;strokeWidth=2;fontSize=11;" value="2.4 Link to&#xa;Enrollments Table" vertex="1">
+          <mxGeometry height="80" width="140" x="710" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S2-P5" parent="L2-1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#16a34a;strokeWidth=2;fontSize=11;" value="2.5 Confirmation&#xa;Output" vertex="1">
+          <mxGeometry height="80" width="130" x="910" y="380" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S2-DS3" parent="L2-1" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#16a34a;strokeWidth=1;fontSize=10;fontStyle=1;size=10;" value="DS3: students table" vertex="1">
+          <mxGeometry height="60" width="120" x="600" y="570" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S2-DS4" parent="L2-1" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#16a34a;strokeWidth=1;fontSize=10;fontStyle=1;size=10;" value="DS4: enrollments table" vertex="1">
+          <mxGeometry height="60" width="130" x="900" y="510" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S2-E1" edge="1" parent="L2-1" source="L2-S2-OFFICE" style="rounded=1;strokeColor=#16a34a;" target="L2-S2-P1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S2-E2" edge="1" parent="L2-1" source="L2-S2-P1" style="rounded=1;strokeColor=#16a34a;" target="L2-S2-P2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S2-E3" edge="1" parent="L2-1" source="L2-S2-P2" style="rounded=1;strokeColor=#16a34a;" target="L2-S2-P3" value="Valid Data">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S2-E4" edge="1" parent="L2-1" source="L2-S2-P3" style="rounded=1;strokeColor=#16a34a;" target="L2-S2-P4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S2-E5" edge="1" parent="L2-1" source="L2-S2-P4" style="rounded=1;strokeColor=#16a34a;" target="L2-S2-P5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S2-E6" edge="1" parent="L2-1" source="L2-S2-P3" style="rounded=1;strokeColor=#16a34a;startArrow=classic;endArrow=classic;" target="L2-S2-DS3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S2-E7" edge="1" parent="L2-1" source="L2-S2-P4" style="rounded=1;strokeColor=#16a34a;" target="L2-S2-DS4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S3-BOX" parent="L2-1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ecfdf5;strokeColor=#10b981;strokeWidth=2;opacity=40;" vertex="1">
+          <mxGeometry height="280" width="1050" x="30" y="700" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S3-HEADER" parent="L2-1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontColor=#059669;fontStyle=1;fontSize=13;" value="Process 3.0 – Academic Management" vertex="1">
+          <mxGeometry height="30" width="1050" x="30" y="705" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S3-TEA" parent="L2-1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ecfdf5;strokeColor=#10b981;fontStyle=1;fontSize=11;" value="Teacher" vertex="1">
+          <mxGeometry height="50" width="100" y="830" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S3-P1" parent="L2-1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#059669;strokeWidth=2;fontSize=11;" value="3.1 Mark Attendance" vertex="1">
+          <mxGeometry height="80" width="140" x="160" y="800" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S3-P2" parent="L2-1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#059669;strokeWidth=2;fontSize=11;" value="3.2 Calculate&#xa;Daily Stats" vertex="1">
+          <mxGeometry height="80" width="140" x="380" y="770" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S3-P3" parent="L2-1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#059669;strokeWidth=2;fontSize=11;" value="3.3 Record&#xa;Semester Grades" vertex="1">
+          <mxGeometry height="80" width="140" x="600" y="770" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S3-P4" parent="L2-1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#059669;strokeWidth=2;fontSize=11;" value="3.4 Update&#xa;Report Cards" vertex="1">
+          <mxGeometry height="80" width="130" x="830" y="720" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S3-DS5" parent="L2-1" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#059669;strokeWidth=1;fontSize=10;fontStyle=1;size=10;" value="DS5: attendance" vertex="1">
+          <mxGeometry height="60" width="120" x="280" y="900" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S3-DS6" parent="L2-1" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#059669;strokeWidth=1;fontSize=10;fontStyle=1;size=10;" value="DS6: grades" vertex="1">
+          <mxGeometry height="60" width="110" x="830" y="830" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S3-E1" edge="1" parent="L2-1" source="L2-S3-TEA" style="rounded=1;strokeColor=#059669;" target="L2-S3-P1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S3-E2" edge="1" parent="L2-1" source="L2-S3-P1" style="rounded=1;strokeColor=#059669;" target="L2-S3-P2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S3-E3" edge="1" parent="L2-1" source="L2-S3-P2" style="rounded=1;strokeColor=#059669;" target="L2-S3-P3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S3-E4" edge="1" parent="L2-1" source="L2-S3-P3" style="rounded=1;strokeColor=#059669;" target="L2-S3-P4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S3-E5" edge="1" parent="L2-1" source="L2-S3-P1" style="rounded=1;strokeColor=#059669;startArrow=classic;endArrow=classic;" target="L2-S3-DS5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S3-E6" edge="1" parent="L2-1" source="L2-S3-P3" style="rounded=1;strokeColor=#059669;" target="L2-S3-DS6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S4-BOX" parent="L2-1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#faf5ff;strokeColor=#7c3aed;strokeWidth=2;opacity=40;" vertex="1">
+          <mxGeometry height="280" width="1100" x="10" y="1020" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S4-HEADER" parent="L2-1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontColor=#7c3aed;fontStyle=1;fontSize=13;" value="Process 4.0 – Cloud Synchronization" vertex="1">
+          <mxGeometry height="30" width="1100" x="10" y="1025" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S4-LOCAL" parent="L2-1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#faf5ff;strokeColor=#7c3aed;fontStyle=1;fontSize=11;" value="Local Data Sources" vertex="1">
+          <mxGeometry height="50" width="120" y="1130" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S4-P1" parent="L2-1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#7c3aed;strokeWidth=2;fontSize=11;" value="4.1 Local Data&#xa;Collection" vertex="1">
+          <mxGeometry height="80" width="130" x="160" y="1115" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S4-P2" parent="L2-1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#7c3aed;strokeWidth=2;fontSize=11;" value="4.2 JSON&#xa;Transformation" vertex="1">
+          <mxGeometry height="80" width="130" x="340" y="1115" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S4-P3" parent="L2-1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#7c3aed;strokeWidth=2;fontSize=11;" value="4.3 POST Request&#xa;to Supabase" vertex="1">
+          <mxGeometry height="80" width="140" x="520" y="1100" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S4-P4" parent="L2-1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#7c3aed;strokeWidth=2;fontSize=11;" value="4.4 Success/Error&#xa;Handling" vertex="1">
+          <mxGeometry height="80" width="140" x="740" y="1070" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S4-P5" parent="L2-1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#7c3aed;strokeWidth=2;fontSize=11;" value="4.5 Cache Update" vertex="1">
+          <mxGeometry height="80" width="130" x="940" y="1070" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S4-DB" parent="L2-1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#020617;fontColor=#ffffff;strokeColor=#7c3aed;fontSize=11;fontStyle=1;aspect=fixed;" value="Supabase Cloud" vertex="1">
+          <mxGeometry height="90" width="90" x="610" y="1200" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S4-E1" edge="1" parent="L2-1" source="L2-S4-LOCAL" style="rounded=1;strokeColor=#7c3aed;" target="L2-S4-P1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S4-E2" edge="1" parent="L2-1" source="L2-S4-P1" style="rounded=1;strokeColor=#7c3aed;" target="L2-S4-P2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S4-E3" edge="1" parent="L2-1" source="L2-S4-P2" style="rounded=1;strokeColor=#7c3aed;" target="L2-S4-P3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S4-E4" edge="1" parent="L2-1" source="L2-S4-P3" style="rounded=1;strokeColor=#7c3aed;" target="L2-S4-P4" value="API Response">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S4-E5" edge="1" parent="L2-1" source="L2-S4-P4" style="rounded=1;strokeColor=#7c3aed;" target="L2-S4-P5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L2-S4-E6" edge="1" parent="L2-1" source="L2-S4-P3" style="rounded=1;strokeColor=#7c3aed;" target="L2-S4-DB">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

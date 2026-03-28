@@ -429,6 +429,7 @@ const StaffPage = () => {
                     <button onClick={() => setActiveTab(StaffRole.Guard)} className={`px-4 py-2 rounded-md text-sm font-semibold transition-all whitespace-nowrap ${activeTab === StaffRole.Guard ? 'bg-white text-primary-600 shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}>Guards</button>
                     <button onClick={() => setActiveTab(StaffRole.Cleaner)} className={`px-4 py-2 rounded-md text-sm font-semibold transition-all whitespace-nowrap ${activeTab === StaffRole.Cleaner ? 'bg-white text-primary-600 shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}>Cleaners</button>
 
+
                     <div className="w-px bg-gray-300 mx-2 my-1"></div>
 
                     <button
@@ -538,6 +539,7 @@ const StaffPage = () => {
                                                     </button>
                                                 )}
 
+                                                {isAdmin && (
                                                     <details className="relative z-10 group" onBlur={(e) => {
                                                         // Close dropdown on blur
                                                         if (!e.currentTarget.contains(e.relatedTarget)) {
@@ -550,12 +552,14 @@ const StaffPage = () => {
                                                             </div>
                                                         </summary>
                                                         <div className="absolute right-0 bottom-full mb-2 w-48 bg-white/95 backdrop-blur-md border border-slate-200 shadow-xl rounded-xl overflow-hidden py-1 z-[100] origin-bottom-right ring-1 ring-slate-900/5 transition-all">
+                                                            {s.role !== StaffRole.Cleaner && (
                                                             <button onClick={() => setInviteStaff(s)} className="w-full flex items-center justify-start gap-3 px-4 py-2.5 text-sm font-semibold text-slate-700 hover:text-indigo-600 hover:bg-indigo-50/80 transition-all">
                                                                 <div className="bg-indigo-100/50 p-1.5 rounded-md text-indigo-500 shrink-0">
                                                                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" /></svg>
                                                                 </div>
                                                                 Invite User
                                                             </button>
+                                                            )}
                                                             <div className="h-px bg-slate-100/80 mx-3 my-0.5"></div>
                                                             <button onClick={() => setPermissionStaff(s)} className="w-full flex items-center justify-start gap-3 px-4 py-2.5 text-sm font-semibold text-slate-700 hover:text-amber-600 hover:bg-amber-50/80 transition-all">
                                                                 <div className="bg-amber-100/50 p-1.5 rounded-md text-amber-500 shrink-0">
@@ -565,6 +569,7 @@ const StaffPage = () => {
                                                             </button>
                                                         </div>
                                                     </details>
+                                                )}
                                                 </div>
                                         </td>
                                     </tr>

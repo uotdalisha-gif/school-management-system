@@ -154,7 +154,13 @@ export const parseStudentCSV = (csvContent) => {
             const sexRaw = getValue('sex');
             const dobRaw = getValue('dob');
             const levelRaw = getValue('level');
-            const phone = getValue('phone');
+            let phone = getValue('phone');
+            if (phone) {
+                phone = String(phone).replace(/^(0?\+855)\s*/, '0');
+                if (!phone.startsWith('0') && phone.replace(/\s/g, '').length >= 8) {
+                    phone = '0' + phone;
+                }
+            }
             const enrollmentDateRaw = getValue('enrollmentDate');
             const statusRaw = getValue('status');
 

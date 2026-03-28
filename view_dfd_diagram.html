@@ -3,262 +3,405 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>School System - Complete DFD Levels</title>
+    <title>System Architecture - DFD Levels | SchoolAdmin</title>
+    <!-- Tailwind CSS for utility-first styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Mermaid for advanced diagrams -->
     <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <!-- Google Fonts: Inter for consistency with the main app -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script>
+        // Tailwind configuration mirroring the main system
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { 'sans': ['Inter', 'sans-serif'] },
+                    colors: {
+                        primary: {
+                            '50': '#f0f9ff', '100': '#e0f2fe', '200': '#bae6fd', '300': '#7dd3fc',
+                            '400': '#38bdf8', '500': '#0ea5e9', '600': '#0284c7', '700': '#0369a1',
+                            '800': '#075985', '900': '#0f172a', '950': '#020617',
+                        },
+                        slate: {
+                            50: '#f8fafc', 100: '#f1f5f9', 200: '#e2e8f0', 300: '#cbd5e1',
+                            400: '#94a3b8', 500: '#64748b', 600: '#475569', 700: '#334155',
+                            800: '#1e293b', 900: '#0f172a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
-        body { font-family: 'Inter', sans-serif; background: #f8fafc; color: #1e293b; padding: 20px; margin: 0; min-height: 100vh; display: flex; flex-direction: column; align-items: center; }
-        .nav { display: flex; gap: 10px; margin-bottom: 30px; background: #1e293b; padding: 8px; border-radius: 16px; position: sticky; top: 20px; z-index: 1000; }
-        .nav-btn { padding: 10px 20px; border-radius: 10px; border: none; background: transparent; color: #94a3b8; cursor: pointer; font-weight: 600; transition: 0.2s; }
-        .nav-btn.active { background: #3b82f6; color: white; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3); }
-        .container { width: 95%; max-width: 1400px; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 4px 25px rgba(0,0,0,0.05); color: #1e293b; min-height: 800px; overflow-x: auto; }
-        .level-content { display: none; }
-        .level-content.active { display: block; }
-        .mermaid { display: flex; justify-content: center; margin-bottom: 120px; padding-bottom: 60px; border-bottom: 2px solid #f1f5f9; min-height: 500px; }
-        .mermaid:last-child { border-bottom: none; }
-        h1 { font-size: 2.2rem; font-weight: 800; color: #0f172a; margin-top: 0; text-align: center; }
-        h2 { font-size: 1.6rem; font-weight: 700; color: #3b82f6; margin-top: 80px; text-align: center; padding-bottom: 20px; }
-        .description { font-size: 1.1rem; color: #64748b; margin-bottom: 50px; text-align: center; max-width: 900px; margin-left: auto; margin-right: auto; }
+        /* Fix Mermaid text truncation */
+        .mermaid .node label, 
+        .mermaid .node foreignObject,
+        .mermaid .label foreignObject,
+        .mermaid .label div {
+            overflow: visible !important;
+            white-space: nowrap !important;
+            display: block !important;
+            width: auto !important;
+            height: auto !important;
+            text-align: center !important;
+        }
+        
+        .mermaid .node rect, 
+        .mermaid .node circle, 
+        .mermaid .node ellipse {
+            fill-opacity: 1 !important;
+        }
+
+        .mermaid .edgeLabel {
+            background-color: white !important;
+            padding: 2px 4px !important;
+            border-radius: 4px !important;
+            overflow: visible !important;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        .mermaid { display: flex; justify-content: center; width: 100%; transition: all 0.3s ease; }
+        .level-content { display: none; opacity: 0; transform: translateY(10px); transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .level-content.show { display: block; opacity: 1; transform: translateY(0); }
+        
+        /* Modern Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
     </style>
 </head>
-<body>
+<body class="bg-slate-50 text-slate-900 antialiased h-screen overflow-hidden flex flex-col">
 
-    <div class="nav">
-        <button id="btn-0" class="nav-btn" onclick="showLevel(0)">Level 0</button>
-        <button id="btn-1" class="nav-btn" onclick="showLevel(1)">Level 1 Flow</button>
-        <button id="btn-2" class="nav-btn active" onclick="showLevel(2)">Level 2 Breakdown</button>
-    </div>
-
-    <!-- LEVEL 0 -->
-    <div id="level-0" class="container level-content">
-        <h1>Level 0 — Context Diagram</h1>
-        <div class="mermaid">
-            graph TD
-                Admin["Admin User"]
-                Staff["Teacher/Guard"]
-                SMS(("🏫 School Management Hub"))
-                Admin -- Controls --> SMS
-                Staff -- Daily Logs --> SMS
-                SMS -- Sync --> Cloud["Supabase Cloud"]
+    <!-- ══════════ HEADER / NAVIGATION ══════════ -->
+    <nav class="bg-white border-b border-slate-200 px-6 py-4 flex items-center justify-between sticky top-0 z-50 shadow-sm">
+        <div class="flex items-center gap-4">
+            <div class="w-10 h-10 bg-primary-900 rounded-xl flex items-center justify-center text-xl">🏫</div>
+            <div>
+                <h1 class="text-lg font-black tracking-tight text-slate-900 leading-none">SchoolAdmin Architecture</h1>
+                <p class="text-[10px] text-slate-400 uppercase tracking-widest font-bold mt-1">Data Flow Diagrams (DFD)</p>
+            </div>
         </div>
-    </div>
-
-    <!-- LEVEL 1 -->
-    <div id="level-1" class="container level-content">
-        <h1>Level 1 — Functional Map</h1>
-        <div class="mermaid">
-            graph TD
-                P1((1.0 Auth))
-                P2((2.0 Student))
-                P3((3.0 Academics))
-                P4((4.0 Timetables))
-                P5((5.0 Reporting))
-                P6((6.0 Facilities))
-                P7((7.0 Messages))
-                Admin -- Config --> P1
-                P1 -- Route --> P2 & P3 & P4 & P5 & P6 & P7
+        
+        <div class="flex bg-slate-100 p-1 rounded-2xl gap-1">
+            <button id="btn-0" onclick="showLevel(0)" class="px-6 py-2.5 rounded-xl text-sm font-bold transition-all duration-300">Level 0</button>
+            <button id="btn-1" onclick="showLevel(1)" class="px-6 py-2.5 rounded-xl text-sm font-bold transition-all duration-300">Level 1</button>
+            <button id="btn-2" onclick="showLevel(2)" class="px-6 py-2.5 rounded-xl text-sm font-bold transition-all duration-300">Level 2</button>
         </div>
-    </div>
+    </nav>
 
-    <!-- LEVEL 2 BREAKDOWN -->
-    <div id="level-2" class="container level-content active">
-        <h1>Level 2 — Sub-Process Architecture</h1>
-        <p class="description">Detailed vertical pipeline stacks for all core operations, matching the high-complexity standard.</p>
+    <!-- ══════════ MAIN VIEWPORT ══════════ -->
+    <main class="flex-1 overflow-y-auto p-6 lg:p-12 relative">
+        <div class="max-w-7xl mx-auto h-full">
+            
+            <!-- LEVEL 0 — CONTEXT DIAGRAM -->
+            <div id="level-0" class="level-content space-y-12">
+                <div class="text-center max-w-3xl mx-auto">
+                    <span class="inline-block py-1 px-3 rounded-full bg-primary-100 text-primary-700 font-bold text-xs uppercase tracking-widest mb-4">Top Level Summary</span>
+                    <h2 class="text-3xl md:text-5xl font-black text-slate-950 mb-6">Level 0 Context Diagram</h2>
+                    <p class="text-lg text-slate-500 font-medium">Visualizing the system's boundary and interactions with all external actors — from School Admins to Security Staff.</p>
+                </div>
+                
+                <div class="bg-white p-12 rounded-[40px] shadow-2xl shadow-primary-500/5 border border-slate-200 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-64 h-64 bg-primary-500/5 rounded-full blur-3xl -mr-32 -mt-32"></div>
+                    <div class="mermaid relative z-10" id="m0">
+graph TD
+    %% Define External Entities
+    ADMIN(["Admin Staff"])
+    TEACHER(["Teachers"])
+    OFFICE(["Office Staff"])
+    CLOUD(["Supabase Database"])
 
-        <!-- 2.1 AUTHENTICATION -->
-        <h2>1. Authentication & Security</h2>
-        <div class="mermaid">
-            graph LR
-                User["User Staff/Admin"]
-                subgraph Stack1
-                    P11((1.1 <br/> check valid))
-                    P12((1.2 <br/> check permission))
-                    P13((1.3 <br/> check MFA status))
-                    P14((1.4 <br/> grant access))
-                end
-                Users[(Users DB)]
-                User -- "credentials" --> P11
-                P11 -- "query" --> Users
-                P11 -- "msg valid" --> User
-                P11 --> P12
-                P12 -- "ask permission" --> User
-                P12 -- "role metadata" --> Users
-                P12 --> P13
-                P13 -- "auth token" --> Users
-                P13 --> P14
-                P14 -- "login success" --> User
+    %% Define the System
+    subgraph SYSTEM ["&nbsp;"]
+        SMS(("SCHOOL MANAGEMENT HUB"))
+    end
+
+    %% Interactions
+    ADMIN <-->|"Controls & Reports"| SMS
+    TEACHER <-->|"Attendance & Grades"| SMS
+    OFFICE <-->|"Registration"| SMS
+    SMS <-->|"Cloud Sync"| CLOUD
+
+    %% Styling
+    style SMS fill:#1e293b,color:#fff,stroke:#3b82f6,stroke-width:6px
+    style ADMIN fill:#eff6ff,stroke:#3b82f6
+    style TEACHER fill:#ecfdf5,stroke:#10b981
+    style OFFICE fill:#fffbeb,stroke:#f59e0b
+    style CLOUD fill:#020617,color:#fff,stroke:#3b82f6
+    style SYSTEM fill:none,stroke:#3b82f6,stroke-width:2px,stroke-dasharray: 10 5
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="p-8 bg-white rounded-3xl border border-slate-200">
+                        <h4 class="font-black text-slate-900 mb-2">High Integrity</h4>
+                        <p class="text-sm text-slate-500">Every interaction is validated against strict role-based access control (RBAC) layers.</p>
+                    </div>
+                    <div class="p-8 bg-white rounded-3xl border border-slate-200">
+                        <h4 class="font-black text-slate-900 mb-2">Real-time Push</h4>
+                        <p class="text-sm text-slate-500">Changes propagate to all connected actors via low-latency persistent socket connections.</p>
+                    </div>
+                    <div class="p-8 bg-white rounded-3xl border border-slate-200">
+                        <h4 class="font-black text-slate-900 mb-2">Cloud Persistence</h4>
+                        <p class="text-sm text-slate-500">Zero data loss guaranteed by the Supabase Cloud backend with automated backups.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LEVEL 1 — FUNCTIONAL BREAKDOWN -->
+            <div id="level-1" class="level-content space-y-12">
+                <div class="text-center max-w-3xl mx-auto">
+                    <span class="inline-block py-1 px-3 rounded-full bg-emerald-100 text-emerald-700 font-bold text-xs uppercase tracking-widest mb-4">Operational Map</span>
+                    <h2 class="text-3xl md:text-5xl font-black text-slate-950 mb-6">Level 1 Functional Map</h2>
+                    <p class="text-lg text-slate-500 font-medium">Deconstructing the core system into specialized functional domains that handle the school's diverse operations.</p>
+                </div>
+
+                <div class="bg-white p-12 rounded-[40px] shadow-2xl shadow-primary-500/5 border border-slate-200">
+                    <div class="mermaid" id="m1">
+graph TD
+    %% Entities
+    ADMIN(["Admin Staff"])
+    OFFICE(["Office Staff"])
+    TEACHER(["Teachers"])
+    SUPA[("Supabase DB")]
+
+    %% Processes
+    P1(("1.0 User & Access Management"))
+    P2(("2.0 Student Registration"))
+    P3(("3.0 Academic Management"))
+    P4(("4.0 Data Synchronization"))
+
+    %% Data Stores
+    D1[("D1: staff (roles, passwords)")]
+    D2[("D2: students + enrollments")]
+    D3[("D3: grades + attendance")]
+
+    %% Edges (Updated with Data Item Labels)
+    ADMIN -->|"Manage Staff / Settings"| P1
+    P1 -.->|"Credentials / Dashboards"| ADMIN
+    P1 <-->|"staff_id / secrets"| D1
+
+    OFFICE -->|"Student Registration Data"| P2
+    P2 -.->|"Student ID / Confirmation"| OFFICE
+    P2 <-->|"enr_id / student_data"| D2
+
+    TEACHER -->|"Daily Attendance / Grades"| P3
+    P3 -.->|"Class Lists / Performance Reports"| TEACHER
+    P3 <-->|"att_id / grade_data"| D3
+
+    D1 -->|"JSON Payload"| P4
+    D2 -->|"JSON Payload"| P4
+    D3 -->|"JSON Payload"| P4
+    P4 <-->|"sync_school_data_v2() API"| SUPA
+
+    %% Styling
+    style SUPA fill:#020617,color:#fff,stroke:#3b82f6
+    style P1 fill:#fff7ed,stroke:#fb923c
+    style P2 fill:#f0fdf4,stroke:#22c55e
+    style P3 fill:#ecfdf5,stroke:#10b981
+    style P4 fill:#faf5ff,stroke:#a855f7
+    style D1 stroke:#fb923c
+    style D2 stroke:#22c55e
+    style D3 stroke:#10b981
+                    </div>
+                </div>
+
+                <div class="max-w-4xl mx-auto space-y-4">
+                    <div class="flex items-start gap-4 p-6 bg-amber-50 rounded-3xl border border-amber-100">
+                        <div class="p-2 bg-amber-100 rounded-xl text-amber-700 font-bold">1.0</div>
+                        <div>
+                            <h4 class="font-bold text-amber-900">User & Access Management</h4>
+                            <p class="text-sm text-amber-700/80 leading-relaxed">Handles staff authentication and role-based access control. All session events are logged and synchronized for security audits.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4 p-6 bg-blue-50 rounded-3xl border border-blue-100">
+                        <div class="p-2 bg-blue-100 rounded-xl text-blue-700 font-bold">4.0</div>
+                        <div>
+                            <h4 class="font-bold text-blue-900">Data Synchronization Pipeline</h4>
+                            <p class="text-sm text-blue-700/80 leading-relaxed">The core backbone that upserts local data stores to the Supabase Cloud backend using the sync_school_data_v2 protocol.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LEVEL 2 — PROCESS BREAKDOWN -->
+            <div id="level-2" class="level-content space-y-12 pb-24">
+                <div class="text-center max-w-3xl mx-auto">
+                    <span class="inline-block py-1 px-3 rounded-full bg-amber-100 text-amber-700 font-bold text-xs uppercase tracking-widest mb-4">Deep Pipeline Stacks</span>
+                    <h2 class="text-3xl md:text-5xl font-black text-slate-950 mb-6 font-sans">Level 2 Process Detail</h2>
+                    <p class="text-lg text-slate-500 font-medium">Atomic breakdown of complex operations showing the internal pipeline of validation, logic, and persistence.</p>
+                </div>
+
+                <div class="space-y-8">
+                    <!-- User & Access Management -->
+                    <div class="bg-white p-8 rounded-[32px] border border-slate-200 shadow-sm flex flex-col">
+                        <h3 class="text-lg font-black mb-8 text-orange-700 flex items-center justify-between">
+                            <span class="flex items-center gap-3">
+                                <span class="w-8 h-8 rounded-lg bg-orange-100 flex items-center justify-center text-xs font-bold">1.0</span>
+                                User & Access Management
+                            </span>
+                        </h3>
+                        <div class="mermaid relative" id="m2-1">
+graph LR
+    ADMIN(["Admin Staff"]) --> P11(("1.1 Authenticate (staff.password)"))
+    P11 -->|"verified"| P12(("1.2 Assign Role (staff.role)"))
+    P12 -->|"session event"| P13(("1.3 Log to audit_log"))
+    
+    P11 <--> DS1[("DS1: staff")]
+    P13 --> DS2[("DS2: audit_log")]
+    
+    style DS1 stroke:#ea580c
+    style DS2 stroke:#ea580c
+    style P11 fill:#fff,stroke:#ea580c
+    style P12 fill:#fff,stroke:#ea580c
+    style P13 fill:#fff,stroke:#ea580c
+                        </div>
+                    </div>
+
+                    <!-- Student Registration -->
+                    <div class="bg-white p-8 rounded-[32px] border border-slate-200 shadow-sm flex flex-col">
+                        <h3 class="text-lg font-black mb-8 text-emerald-700 flex items-center justify-between">
+                            <span class="flex items-center gap-3">
+                                <span class="w-8 h-8 rounded-lg bg-emerald-100 flex items-center justify-center text-xs font-bold">2.0</span>
+                                Student Registration Pipeline
+                            </span>
+                        </h3>
+                        <div class="mermaid relative" id="m2-2">
+graph LR
+    OFFICE(["Office Staff"]) --> P21(("2.1 Create Student (students table)"))
+    P21 -->|"student_id"| P22(("2.2 Link to Class (enrollments table)"))
+    P22 --> P23(("2.3 Confirm Registration"))
+    
+    P21 <--> DS3[("DS3: students")]
+    P22 <--> DS4[("DS4: enrollments + classes")]
+    
+    style DS3 stroke:#16a34a
+    style DS4 stroke:#16a34a
+    style P21 fill:#fff,stroke:#16a34a
+    style P22 fill:#fff,stroke:#16a34a
+    style P23 fill:#fff,stroke:#16a34a
+                        </div>
+                    </div>
+
+                    <!-- Academic Management -->
+                    <div class="bg-white p-8 rounded-[32px] border border-slate-200 shadow-sm">
+                        <h3 class="text-lg font-black mb-8 text-primary-700 flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-lg bg-primary-100 flex items-center justify-center text-xs font-bold">3.0</span>
+                            Academic Management Stack
+                        </h3>
+                        <div class="mermaid relative" id="m2-3">
+graph LR
+    TEA(["Teacher"]) --> P31(("3.1 Mark Attendance (attendance table)"))
+    TEA --> P32(("3.2 Record Grades (grades table)"))
+    TEA --> P33(("3.3 View Class (classes + enrollments)"))
+    
+    P31 <--> DS5[("DS5: attendance")]
+    P32 <--> DS6[("DS6: grades")]
+    
+    style DS5 stroke:#059669
+    style DS6 stroke:#059669
+    style P31 fill:#fff,stroke:#059669
+    style P32 fill:#fff,stroke:#059669
+    style P33 fill:#fff,stroke:#059669
+                        </div>
+                    </div>
+
+                    <!-- Data Synchronization -->
+                    <div class="bg-white p-8 rounded-[32px] border border-slate-200 shadow-sm">
+                        <h3 class="text-lg font-black mb-8 text-purple-700 flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-lg bg-purple-100 flex items-center justify-center text-xs font-bold">4.0</span>
+                            Data Synchronization Hub
+                        </h3>
+                        <div class="mermaid relative" id="m2-4">
+graph LR
+    P41(("4.1 Collect All Local Records")) -->|"JSON payload"| P42(("4.2 Call sync_school_data_v2()"))
+    P42 --> P43(("4.3 Upsert to Supabase Tables"))
+    P43 -->|"synced"| SUPA[("Supabase Cloud")]
+    
+    style SUPA fill:#020617,color:#fff,stroke:#a855f7
+    style P41 fill:#fff,stroke:#9333ea
+    style P42 fill:#fff,stroke:#9333ea
+    style P43 fill:#fff,stroke:#9333ea
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
-
-        <!-- 2.2 STUDENT MANAGEMENT -->
-        <h2>2. Add New Student</h2>
-        <div class="mermaid">
-            graph LR
-                Admin2["Admin"]
-                subgraph Stack2
-                    P21((2.1 <br/> check student exist))
-                    P22((2.2 <br/> validate bio-data))
-                    P23((2.3 <br/> link guardian))
-                    P24((2.4 <br/> create student))
-                end
-                Students[(Students DB)]
-                Admin2 -- "student record" --> P21
-                P21 -- "id check" --> Students
-                P21 -- "fail" --> Admin2
-                P21 --> P22
-                P22 -- "require" --> Admin2
-                P22 -- "validate" --> Students
-                P22 --> P23
-                P23 -- "guardian list" --> Students
-                P23 --> P24
-                P24 -- "success msg" --> Admin2
-                P24 -- "record write" --> Students
-        </div>
-
-        <!-- 2.3 ACADEMIC CONFIG -->
-        <h2>3. Add New Level/Class</h2>
-        <div class="mermaid">
-            graph LR
-                Admin3["Admin"]
-                subgraph Stack3
-                    P31((3.1 <br/> check capacity))
-                    P32((3.2 <br/> assign manager))
-                    P33((3.3 <br/> verify level exist))
-                    P34((3.4 <br/> create class))
-                end
-                Acad[(Academic DB)]
-                Admin3 -- "class data" --> P31
-                P31 -- "room info" --> Acad
-                P31 --> P32
-                P32 -- "assign" --> Admin3
-                P32 --> P33
-                P33 -- "level info" --> Acad
-                P33 --> P34
-                P34 -- "success" --> Admin3
-                P34 -- "class meta" --> Acad
-        </div>
-
-        <!-- 2.4 TIMETABLES -->
-        <h2>4. Add New Timetable</h2>
-        <div class="mermaid">
-            graph LR
-                Planner["Academic Planner"]
-                subgraph Stack4
-                    P41((4.1 <br/> check time slots))
-                    P42((4.2 <br/> verify teacher availability))
-                    P43((4.3 <br/> check room occupancy))
-                    P44((4.4 <br/> generate schedule))
-                end
-                Slots[(Schedule Store)]
-                Planner -- "timeslot data" --> P41
-                P41 -- "slot check" --> Slots
-                P41 --> P42
-                P42 -- "conflict check" --> Planner
-                P42 --> P43
-                P43 -- "occupancy data" --> Slots
-                P43 --> P44
-                P44 -- "timetable info" --> Planner
-                P44 -- "publish" --> Slots
-        </div>
-
-        <!-- 2.5 REPORTING -->
-        <h2>5. Add Daily Attendance/Results</h2>
-        <div class="mermaid">
-            graph LR
-                Teacher["Teacher"]
-                subgraph Stack5
-                    P51((5.1 <br/> check student list))
-                    P52((5.2 <br/> mark status))
-                    P53((5.3 <br/> calculate totals))
-                    P54((5.4 <br/> finalize report))
-                end
-                Results[(Records DB)]
-                Teacher -- "attenance data" --> P51
-                P51 -- "student info" --> Results
-                P51 --> P52
-                P52 -- "update status" --> Results
-                P52 --> P53
-                P53 -- "aggregation" --> Results
-                P53 --> P54
-                P54 -- "report card info" --> Teacher
-                P54 -- "publish log" --> Results
-        </div>
-
-        <!-- 2.6 FACILITIES -->
-        <h2>6. Add Security/Cleaning Log</h2>
-        <div class="mermaid">
-            graph LR
-                Staff["Security/Cleaner"]
-                subgraph Stack6
-                    P61((6.1 <br/> check item/room id))
-                    P62((6.2 <br/> validate staff token))
-                    P63((6.3 <br/> capture timestamp))
-                    P64((6.4 <br/> store activity))
-                end
-                Logs[(Activity DB)]
-                Staff -- "log data" --> P61
-                P61 -- "item info" --> Logs
-                P61 --> P62
-                P62 -- "token valid" --> Staff
-                P62 -- "verify identity" --> Logs
-                P62 --> P63
-                P63 --> P64
-                P64 -- "success" --> Staff
-                P64 -- "event info" --> Logs
-        </div>
-
-        <!-- 2.7 CHAT -->
-        <h2>7. Process Internal Messages</h2>
-        <div class="mermaid">
-            graph LR
-                Sender["Sender Staff"]
-                subgraph Stack7
-                    P71((7.1 <br/> validate payload))
-                    P72((7.2 <br/> upload media asset))
-                    P73((7.3 <br/> store chat string))
-                    P74((7.4 <br/> real-time sync))
-                end
-                ChatDB[(Message Store)]
-                Sender -- "chat info" --> P71
-                P71 -- "check valid" --> ChatDB
-                P71 --> P72
-                P72 -- "media link" --> ChatDB
-                P72 --> P73
-                P73 -- "chat data" --> ChatDB
-                P73 --> P74
-                P74 -- "chat info" --> Sender
-                P74 -- "push sync" --> ChatDB
-        </div>
-
-    </div>
+    </main>
 
     <script>
+        // Mermaid Configuration
         mermaid.initialize({
             startOnLoad: false,
-            theme: 'default',
-            flowchart: { useMaxWidth: true, htmlLabels: true, curve: 'basis' }
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#3b82f6',
+                primaryTextColor: '#1e293b',
+                primaryBorderColor: '#3b82f6',
+                lineColor: '#bbccdd',
+                secondaryColor: '#f8fafc',
+                tertiaryColor: '#fff',
+                fontFamily: 'Arial, sans-serif',
+                fontSize: '18px',
+                edgeLabelBackground: 'white',
+                nodePadding: '20'
+            },
+            flowchart: { 
+                useMaxWidth: false, 
+                htmlLabels: true, 
+                curve: 'basis',
+                padding: 100
+            }
         });
 
-        window.showLevel = function(lvl) {
-            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
-            document.getElementById('btn-' + lvl).classList.add('active');
+        const levels = [0, 1, 2];
+        const buttons = levels.map(l => document.getElementById('btn-' + l));
+        const contents = levels.map(l => document.getElementById('level-' + l));
 
-            document.querySelectorAll('.level-content').forEach(el => el.classList.remove('active'));
-            const activeLevel = document.getElementById('level-' + lvl);
-            activeLevel.classList.add('active');
-
-            const mermaids = activeLevel.querySelectorAll('.mermaid');
-            mermaids.forEach((m, index) => {
-                if (!m.getAttribute('data-processed')) {
-                    mermaid.render('mermaid-svg-' + lvl + '-' + index, m.textContent).then(({svg}) => {
-                        m.innerHTML = svg;
-                        m.setAttribute('data-processed', 'true');
-                    });
+        function showLevel(lvl) {
+            // Update buttons
+            buttons.forEach((btn, i) => {
+                if (i === lvl) {
+                    btn.classList.add('bg-white', 'text-primary-700', 'shadow-sm');
+                    btn.classList.remove('text-slate-500');
+                } else {
+                    btn.classList.remove('bg-white', 'text-primary-700', 'shadow-sm');
+                    btn.classList.add('text-slate-500');
                 }
             });
-        };
 
+            // Update content visibility
+            contents.forEach((content, i) => {
+                if (i === lvl) {
+                    content.style.display = 'block';
+                    // Trigger render after display:block
+                    setTimeout(() => content.classList.add('show'), 50);
+                    
+                    // Render Mermaid diagrams for this level
+                    const diagrams = content.querySelectorAll('.mermaid');
+                    diagrams.forEach((m) => {
+                        if (!m.getAttribute('data-processed')) {
+                            const content = m.textContent.trim();
+                            mermaid.render(m.id + '-svg', content).then(({svg}) => {
+                                m.innerHTML = svg;
+                                m.setAttribute('data-processed', 'true');
+                            });
+                        }
+                    });
+                } else {
+                    content.classList.remove('show');
+                    setTimeout(() => content.style.display = 'none', 500);
+                }
+            });
+        }
+
+        // Initialize with Level 0
         document.addEventListener('DOMContentLoaded', () => {
-            showLevel(2); // Start with Level 2
+            showLevel(0);
         });
     </script>
 </body>

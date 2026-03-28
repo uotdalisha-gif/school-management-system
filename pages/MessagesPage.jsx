@@ -749,36 +749,43 @@ const MessagesPage = () => {
                         </button>
                     )}
 
-                    {/* Contact avatar */}
-                    {activeConversation === 'all' ? (
-                        <div className="w-9 h-9 rounded-xl bg-blue-100 flex items-center justify-center shrink-0">
-                            <svg className="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6" />
-                            </svg>
-                        </div>
-                    ) : isAdmin && activeStaff ? (
-                        <div className="w-9 h-9 rounded-full bg-gradient-to-br from-slate-600 to-slate-900 flex items-center justify-center text-white font-bold text-sm shrink-0">
-                            {activeStaff.name.charAt(0).toUpperCase()}
-                        </div>
-                    ) : (
-                        <div className="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold text-sm shrink-0">A</div>
-                    )}
+                    {/* Determine active contact info once */}
+                    {(() => {
+                        const isAll = activeConversation === 'all';
+                        const activeContact = !isAll ? filteredStaffConversations.find(c => c.id === activeConversation) : null;
+                        
+                        // Default to Administrator if we can't find them (fallback)
+                        const displayName = isAll ? 'All Staff Announcement' : (activeContact?.name || 'Administrator');
+                        const displayRole = isAll ? `${staff.length} staff members` : (activeContact?.role || '● School Admin');
+                        const displayInitial = isAll ? null : (activeContact ? activeContact.name.charAt(0).toUpperCase() : 'A');
 
-                    {/* Contact name */}
-                    <div className="flex-1 min-w-0">
-                        <p className="font-bold text-slate-800 text-sm leading-tight">
-                            {activeConversation === 'all' ? 'All Staff Announcement'
-                                : (isAdmin || currentUser?.role === UserRole.Teacher) && filteredStaffConversations.find(c => c.id === activeConversation)?.name 
-                                    ? filteredStaffConversations.find(c => c.id === activeConversation).name
-                                    : 'Administrator'}
-                        </p>
-                        <p className="text-xs text-slate-400 leading-tight">
-                            {activeConversation === 'all' ? `${staff.length} staff members`
-                                : (isAdmin || currentUser?.role === UserRole.Teacher) && filteredStaffConversations.find(c => c.id === activeConversation)?.role 
-                                    ? filteredStaffConversations.find(c => c.id === activeConversation).role
-                                    : '● School Admin'}
-                        </p>
-                    </div>
+                        return (
+                            <>
+                                {/* Contact avatar */}
+                                {isAll ? (
+                                    <div className="w-9 h-9 rounded-xl bg-blue-100 flex items-center justify-center shrink-0">
+                                        <svg className="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6" />
+                                        </svg>
+                                    </div>
+                                ) : (
+                                    <div className={`w-9 h-9 rounded-full flex items-center justify-center text-white font-bold text-sm shrink-0 ${activeConversation === ADMIN_KEY ? 'bg-gradient-to-br from-indigo-500 to-purple-600' : 'bg-gradient-to-br from-slate-600 to-slate-900'}`}>
+                                        {displayInitial}
+                                    </div>
+                                )}
+
+                                {/* Contact name */}
+                                <div className="flex-1 min-w-0">
+                                    <p className="font-bold text-slate-800 text-sm leading-tight">
+                                        {displayName}
+                                    </p>
+                                    <p className="text-xs text-slate-400 leading-tight">
+                                        {displayRole}
+                                    </p>
+                                </div>
+                            </>
+                        );
+                    })()}
 
                     {/* Staff quick-action buttons — compact pills in header */}
                     {!isAdmin && activeConversation === ADMIN_KEY && (

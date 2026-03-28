@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { useData } from '../context/DataContext';
 import { StudentStatus, UserRole } from '../types';
-import { AdminDashboard, TeacherDashboard, OfficeWorkerDashboard, GuardDashboard, CleanerDashboard } from '../components/dashboards/RoleDashboards';
+import { AdminDashboard, TeacherDashboard, OfficeWorkerDashboard, GuardDashboard } from '../components/dashboards/RoleDashboards';
 import PerformanceChart from '../components/charts/PerformanceChart';
 import { CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContainer, AreaChart, Area, PieChart, Pie, Cell, Legend } from 'recharts';
 
@@ -151,8 +151,7 @@ const DashboardPage = ({ navigate }) => {
                 return <OfficeWorkerDashboard />;
             case UserRole.Guard:
                 return <GuardDashboard />;
-            case UserRole.Cleaner:
-                return <CleanerDashboard />;
+
             default:
                 return <AdminDashboard navigate={navigate} />;
         }

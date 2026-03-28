@@ -327,19 +327,37 @@
 
   <!-- Mermaid: context diagram -->
   <div class="diagram-box">
-    <div class="diagram-label">📐 System Context Diagram</div>
+    <div class="diagram-label">📐 Level 0 · System Context Diagram</div>
     <div class="mermaid">
 graph TD
-    A["👨‍💼 School Admin"] --> APP
-    B["👩‍🏫 Teacher"]       --> APP
-    C["👩‍💻 Office Worker"] --> APP
+    %% Define External Entities
+    ADMIN["👨‍💼 School Admin"]
+    TEACHER["👩‍🏫 Teacher"]
+    OFFICE["👩‍💻 Office Staff"]
+    GUARD["👮 Security Guard"]
+    CLEANER["🧹 Cleaning Staff"]
 
-    APP["🖥️ SchoolAdmin Website"]
+    %% Define the System
+    subgraph SYSTEM_BOD ["&nbsp;"]
+        APP["🖥️ SchoolAdmin Hub"]
+    end
 
-    APP -->|"Zero-Latency Saves"| LS["⚡ Browser\nlocalStorage Engine"]
+    %% Storage
+    STORAGE["☁️ Cloud Database<br/>(Supabase)"]
 
-    style APP fill:#1e3a8a,color:#fff,stroke:#3b82f6,stroke-width:2px
-    style LS  fill:#f59e0b,color:#fff,stroke:#d97706,stroke-width:2px
+    %% Flows
+    ADMIN   -- "Manages System" --> APP
+    TEACHER -- "Marks Attendance" --> APP
+    OFFICE  -- "Enrolls Students" --> APP
+    GUARD   -- "Logs Visitors" --> APP
+    CLEANER -- "Updates Rooms" --> APP
+
+    APP -- "Persists Data" --> STORAGE
+
+    %% Styling
+    style APP fill:#1e293b,color:#fff,stroke:#3b82f6,stroke-width:4px
+    style STORAGE fill:#f8fafc,stroke:#94a3b8,stroke-dasharray: 5 5
+    style SYSTEM_BOD fill:none,stroke:#3b82f6,stroke-dasharray: 10 5
     </div>
   </div>
 </div>
