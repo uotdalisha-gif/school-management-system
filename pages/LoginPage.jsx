@@ -170,7 +170,7 @@ const LoginPage = ({ onLogin }) => {
 
                     {selectedRole !== UserRole.Admin && (
                         <div className="space-y-1 animate-in slide-in-from-top-2 duration-300">
-                            <label htmlFor="identifier" className="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">Staff Name or Contact</label>
+                            <label htmlFor="identifier" className="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">Staff Contact Number</label>
                             <input
                                 id="identifier"
                                 type="text"
@@ -178,7 +178,7 @@ const LoginPage = ({ onLogin }) => {
                                 value={identifier}
                                 onChange={(e) => setIdentifier(e.target.value)}
                                 className="w-full px-4 py-3 text-slate-900 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 transition-all"
-                                placeholder="e.g. John Doe"
+                                placeholder="e.g. 012 345 678"
                             />
                         </div>
                     )}
