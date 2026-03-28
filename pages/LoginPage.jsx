@@ -90,7 +90,20 @@ const LoginPage = ({ onLogin }) => {
                     onLogin(selectedRole);
                 }
             } else {
-                // If no staff found with that identifier, but role matches, show error
+                // Check if they exist under a different role
+                const wrongRoleStaff = staff.find(s => {
+                    const nameMatch = (s.name || '').toLowerCase() === searchId;
+                    const contactMatch = (s.contact || '').toLowerCase().split('|').map(c => c.trim()).includes(searchId);
+                    return nameMatch || contactMatch;
+                });
+
+                if (wrongRoleStaff) {
+                    setError(`"${wrongRoleStaff.name}" is registered as a ${wrongRoleStaff.role}. Please change your role selection to ${wrongRoleStaff.role}.`);
+                    setIsLoggingIn(false);
+                    return;
+                }
+
+                // If no staff found with that identifier at all
                 if (staff.some(s => s.role === selectedRole)) {
                     setError(`No account found for "${identifier}" under the role: ${selectedRole}. Please check spelling or contact number.`);
                 } else {
