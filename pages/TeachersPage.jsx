@@ -551,7 +551,7 @@ const StaffPage = () => {
                                                                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" /></svg>
                                                             </div>
                                                         </summary>
-                                                        <div className="absolute right-0 bottom-full mb-2 w-48 bg-white/95 backdrop-blur-md border border-slate-200 shadow-xl rounded-xl overflow-hidden py-1 z-[100] origin-bottom-right ring-1 ring-slate-900/5 transition-all">
+                                                        <div className="absolute right-0 top-full mt-2 w-48 bg-white/95 backdrop-blur-md border border-slate-200 shadow-xl rounded-xl overflow-hidden py-1 z-[100] origin-top-right ring-1 ring-slate-900/5 transition-all">
                                                             {s.role !== StaffRole.Cleaner && (
                                                             <button onClick={() => setInviteStaff(s)} className="w-full flex items-center justify-start gap-3 px-4 py-2.5 text-sm font-semibold text-slate-700 hover:text-indigo-600 hover:bg-indigo-50/80 transition-all">
                                                                 <div className="bg-indigo-100/50 p-1.5 rounded-md text-indigo-500 shrink-0">
