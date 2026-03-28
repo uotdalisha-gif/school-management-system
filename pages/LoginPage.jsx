@@ -69,10 +69,11 @@ const LoginPage = ({ onLogin }) => {
         } else {
             // Check if staff exists with this identifier (case-insensitive name OR contact) and password
             const searchId = identifier.trim().toLowerCase();
-            const foundStaff = staff.find(s =>
-                ((s.name || '').toLowerCase() === searchId || (s.contact || '').toLowerCase() === searchId)
-                && s.role === selectedRole
-            );
+            const foundStaff = staff.find(s => {
+                const nameMatch = (s.name || '').toLowerCase() === searchId;
+                const contactMatch = (s.contact || '').toLowerCase().split('|').map(c => c.trim()).includes(searchId);
+                return (nameMatch || contactMatch) && s.role === selectedRole;
+            });
 
             if (foundStaff) {
                 if (foundStaff.password) {
@@ -192,7 +193,11 @@ const LoginPage = ({ onLogin }) => {
                                 name="password"
                                 type={showPassword ? 'text' : 'password'}
                                 autoComplete="current-password"
-                                required={selectedRole === UserRole.Admin || staff.some(s => ((s.name || '').toLowerCase() === identifier.trim().toLowerCase() || (s.contact || '').toLowerCase() === identifier.trim().toLowerCase()) && s.password)}
+                                required={selectedRole === UserRole.Admin || staff.some(s => {
+                                    const nm = (s.name || '').toLowerCase() === identifier.trim().toLowerCase();
+                                    const cm = (s.contact || '').toLowerCase().split('|').map(c => c.trim()).includes(identifier.trim().toLowerCase());
+                                    return (nm || cm) && s.password;
+                                })}
                                 value={password}
                                 onChange={(e) => {
                                     setPassword(e.target.value);
