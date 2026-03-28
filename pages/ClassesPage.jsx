@@ -198,8 +198,12 @@ const ClassesPage = () => {
      * Generates and downloads a CSV template for class imports.
      */
     const handleDownloadTemplate = () => {
-        const headers = ['Class Name', 'Level', 'Teacher', 'Schedule'];
-        const csvContent = headers.join(',');
+        const rows = [
+            ['Class Name', 'Level', 'Teacher', 'Schedule'],
+            ['Math 101', 'Grade 10', 'John Doe', 'Mon-Wed-Fri 08:00 AM'],
+            ['Science Lab', 'Grade 9', 'Jane Smith', 'Tue-Thu 10:00 AM']
+        ];
+        const csvContent = rows.map(e => e.join(",")).join("\n");
 
         const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
         const link = document.createElement('a');

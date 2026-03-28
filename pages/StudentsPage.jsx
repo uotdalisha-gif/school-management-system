@@ -309,11 +309,16 @@ const StudentsPage = () => {
      * Generates and downloads a CSV template for student imports.
      */
     const handleDownloadTemplate = () => {
-        const headers = ['Full Name', 'Sex', 'Date of Birth', 'Level', 'Phone Number', 'Enrollment Date', 'Status'];
-        const blob = new Blob([headers.join(',')], { type: 'text/csv;charset=utf-8;' });
+        const rows = [
+            ['Full Name', 'Sex', 'Date of Birth', 'Level', 'Phone Number', 'Enrollment Date', 'Status'],
+            ['Sok Dara', 'Male', '2010-05-14', 'Grade 5', '012 345 678', '2023-09-01', 'Active'],
+            ['Meas Bopha', 'Female', '2009-11-20', 'Grade 6', '098 765 432', '2022-09-01', 'Active']
+        ];
+        const csvContent = rows.map(e => e.join(",")).join("\n");
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
         const link = document.createElement('a');
         link.href = URL.createObjectURL(blob);
-        link.download = 'student_template.csv';
+        link.download = 'student_import_template.csv';
         link.click();
     };
 

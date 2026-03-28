@@ -252,8 +252,13 @@ const StaffPage = () => {
      * Generates and downloads a CSV template for staff imports.
      */
     const handleDownloadTemplate = () => {
-        const headers = ['Name', 'Role', 'Contact', 'Hire Date', 'Subject'];
-        const csvContent = headers.join(',');
+        const rows = [
+            ['Name', 'Role', 'Contact', 'Hire Date', 'Subject'],
+            ['John Doe', 'Teacher', '012 345 678 | john@school.com', '2023-01-15', 'Math'],
+            ['Jane Smith', 'Office Worker', '098 765 432', '2023-02-20', ''],
+            ['Bob Wilson', 'Assistant', '011 222 333', '2023-03-10', 'Science']
+        ];
+        const csvContent = rows.map(e => e.join(",")).join("\n");
         const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
         const link = document.createElement('a');
         link.href = URL.createObjectURL(blob);
